@@ -5,9 +5,6 @@ class PetApplicationsController < ApplicationController
   end
 
   def update
-    # pet = Pet.find(params[:pet_id])
-    # application = Application.find(params[:application_id])
-
     pet_app = PetApplication.find_by(pet_id: params[:pet_id], application_id: params[:application_id])
 
     if params[:status] == "Approved"

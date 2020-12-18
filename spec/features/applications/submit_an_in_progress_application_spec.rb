@@ -20,7 +20,6 @@ RSpec.describe "As a user" do
         expect(page).to have_content("Why would you be a good home?")
         fill_in("description", :with => "I have a large house and am home most of the time.")
         click_button "Submit Application"
-
       end
       
       expect(current_path).to eq("/applications/#{@application.id}")
