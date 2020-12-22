@@ -8,8 +8,8 @@ RSpec.describe "As a user" do
       @pet2 = FactoryBot.create(:pet)
       @application = FactoryBot.create(:application)
   
-      PetApplication.create(application_id: @application.id, pet_id: @pet1.id)
-      PetApplication.create(application_id: @application.id, pet_id: @pet2.id)
+      PetApplication.create!(application_id: @application.id, pet_id: @pet1.id)
+      PetApplication.create!(application_id: @application.id, pet_id: @pet2.id)
     end
     
     it "and I approve all pets for adoption" do

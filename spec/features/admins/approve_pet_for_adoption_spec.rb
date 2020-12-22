@@ -29,7 +29,7 @@ RSpec.describe "As a user" do
         click_button("Approve")
       end
 
-      expect(current_path).to eq("/admin/applications/#{@application.id}")
+      expect(current_path).to eq("/admin/applications/#{ @application.id }")
 
       within("#pet-#{@pet1.id}") do
         expect(page).to have_content(@pet1.name)
