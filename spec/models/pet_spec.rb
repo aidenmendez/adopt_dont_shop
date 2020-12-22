@@ -79,13 +79,12 @@ describe Pet, type: :model do
 
     it "returns all pets when there is no search parameter" do
       expect(Pet.search_pets(nil)).to eq(Pet.all)
-      expect(Pet.search_pets("")).to eq(Pet.all)
     end
-
+    
     it "returns nil when there is no pet matching the search parameter" do
       expect(Pet.search_pets("12345")).to eq(nil)
     end
-
+    
     it "returns all pets when nothing is entered" do
       expect(Pet.search_pets("")).to eq(Pet.all)
     end
