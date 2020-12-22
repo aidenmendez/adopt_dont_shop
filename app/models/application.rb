@@ -13,4 +13,8 @@ class Application < ApplicationRecord
     pet_app = PetApplication.find_by(pet_id: pet_id, application_id: id)
     pet_app.status
   end
+
+  def update_status(new_status)
+    update(status: new_status)
+  end
 end
