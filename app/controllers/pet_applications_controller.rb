@@ -14,10 +14,17 @@ class PetApplicationsController < ApplicationController
       if PetApplication.all_approved?(params[:application_id])
         # if true, update application status from "In Progress" to "Approved"
         Application.find_by(id: params[:application_id]).update_status("Approved")
+      # check if pet processing is finished and if any pets were rejected
+      elsif PetApplication.rejected_application?(params[:application_id])
+        Application.find_by(id: params[:application_id]).update_status("Rejected")
       end
     elsif params[:status] == "Rejected"
       pet_app.status = "Rejected"
       pet_app.save
+
+      if PetApplication.rejected_application?(params[:application_id])
+        Application.find_by(id: params[:application_id]).update_status("Rejected")
+      end
     end
 
     redirect_to params[:path]
