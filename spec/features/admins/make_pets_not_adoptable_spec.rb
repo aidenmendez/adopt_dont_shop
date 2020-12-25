@@ -14,23 +14,31 @@ RSpec.describe "As a user" do
       PetApplication.create!(application_id: @application.id, pet_id: @pet3.id)
     end
 
-    it "And I reject one pet for the application and approve the rest" do
+    it "and I approve an application, those pets are no longer adoptable" do
       visit "/admin/applications/#{@application.id}"
 
-      within("#pet-#{ @pet1.id }") do
-        click_button("Reject")
-      end
-
-      within("#pet-#{ @pet2.id }") do
+      within("#pet-#{@pet1.id}") do
         click_button("Approve")
       end
-  
-      within("#pet-#{ @pet3.id }") do
+
+      within("#pet-#{@pet2.id}") do
+        click_button("Approve")
+      end
+
+      within("#pet-#{@pet3.id}") do
         click_button("Approve")
       end
 
       expect(current_path).to eq("/admin/applications/#{@application.id}")
-      expect(page).to have_content("Application Status: Rejected")
+  
+      visit "/pets/#{@pet1.id}"
+      expect(page).to have_content("Adoption Status: false")
+  
+      visit "/pets/#{@pet2.id}"
+      expect(page).to have_content("Adoption Status: false")
+  
+      visit "/pets/#{@pet3.id}"
+      expect(page).to have_content("Adoption Status: false")
     end
   end
 end
