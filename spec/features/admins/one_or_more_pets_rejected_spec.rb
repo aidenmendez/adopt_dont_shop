@@ -32,10 +32,5 @@ RSpec.describe "As a user" do
       expect(current_path).to eq("/admin/applications/#{@application.id}")
       expect(page).to have_content("Application Status: Rejected")
     end
-
-    # it "And I approve all other pets on the application" do
-    #   visit "/admin/applications/#{@application.id}"
-      
-    # end
   end
 end
