@@ -6,12 +6,19 @@
     <% if @application.adoption_status(pet.id) == "Approved" %>
       <p><%= pet.name %> | <b>Approved</b><p>
     <% elsif @application.adoption_status(pet.id) == "Rejected" %>
-    <p><%= pet.name %> | <b>Rejected</b><p>
+      <p><%= pet.name %> | <b>Rejected</b><p>
     <% else %>
       <%= link_to "#{pet.name}", pets_show_path(id: pet.id) %><br/>
-      <%= button_to "Approve", pet_applications_update_path(application_id: @application.id, pet_id: pet.id), method: :patch, params: {status: "Approved", path: path} %><br/>
-      <%= button_to "Reject", pet_applications_update_path(application_id: @application.id, pet_id: pet.id), method: :patch, params: {status: "Rejected", path: path} %>
+      <% if pet.adoptable %>
+        <%= button_to "Approve", pet_applications_update_path(application_id: @application.id, pet_id: pet.id), method: :patch, params: {status: "Approved", path: path} %><br/>
+        <%= button_to "Reject", pet_applications_update_path(application_id: @application.id, pet_id: pet.id), method: :patch, params: {status: "Rejected", path: path} %>
+      <% else %>
+        <p>This pet has already found a home.</p><br/>
+        <%= button_to "Reject", pet_applications_update_path(application_id: @application.id, pet_id: pet.id), method: :patch, params: {status: "Rejected", path: path} %>
+      <% end %>
     <% end %>
     </section>
   <% end %>
 </ul>
+<%# When a pet is approved, use pet_applications to mark all other pet applications for that pet as rejected and change adoptable to false %>
+<%# Don't show Approve/ Reject buttons if the status is "In Progress" %>
