@@ -2,10 +2,10 @@ require 'rails_helper'
 
 RSpec.describe "As a user" do
   before(:all) do
-    PetApplication.destroy_all
-    Pet.destroy_all
-    Application.destroy_all
-    Shelter.destroy_all
+    # PetApplication.destroy_all
+    # Pet.destroy_all
+    # Application.destroy_all
+    # Shelter.destroy_all
 
     @shelter = FactoryBot.create(:shelter)
     @pet1 = FactoryBot.create(:pet)

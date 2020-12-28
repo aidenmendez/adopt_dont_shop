@@ -45,6 +45,8 @@ group :development, :test do
   gem 'faker'
   gem 'nyan-cat-formatter'
   gem 'factory_bot_rails'
+  gem 'orderly'
+  gem 'database_cleaner-active_record'
 end
 
 group :development do
