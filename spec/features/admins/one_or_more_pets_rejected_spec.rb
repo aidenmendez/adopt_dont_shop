@@ -14,7 +14,7 @@ RSpec.describe "As a user" do
       PetApplication.create!(application_id: @application.id, pet_id: @pet3.id)
     end
 
-    it "And I reject one pet for the application and approve the rest" do
+    it "and I reject one pet for the application and approve the rest, the application should be rejected" do
       visit "/admin/applications/#{@application.id}"
 
       within("#pet-#{ @pet1.id }") do

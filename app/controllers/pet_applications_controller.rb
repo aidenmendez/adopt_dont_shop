@@ -21,6 +21,7 @@ class PetApplicationsController < ApplicationController
         end
       # check if pet processing is finished and if any pets were rejected
       elsif PetApplication.rejected_application?(params[:application_id])
+        Application.find_by(id: params[:application_id]).update_status("Rejected")
         Pet.find_by(id: params[:pet_id]).toggle(:adoptable).save
       end
     elsif params[:status] == "Rejected"
