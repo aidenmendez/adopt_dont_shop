@@ -32,5 +32,6 @@ Rails.application.routes.draw do
   
   scope :admin, as: "admin" do
     resources :applications, controller: "admin_applications", only: [:show]
+    resources :shelters, controller: "admin_shelters", only: [:index, :show]
   end
 end
